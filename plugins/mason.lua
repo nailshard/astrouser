@@ -12,7 +12,7 @@ return {
                 -- "cpptools",
                 "cssls",
                 "html",
-                "isort",
+                -- "isort",
                 "jsonls",
                 "lua_ls",
                 "marksman",
@@ -32,6 +32,20 @@ return {
         opts = {
             ensure_installed = { "black", "prettierd", "stylua" },
         },
+        config = function(_, opts)
+            local mason_null_ls = require "mason-null-ls"
+            local null_ls = require "null-ls"
+            mason_null_ls.setup(opts)
+            mason_null_ls.setup {
+                prettierd = function()
+                    null_ls.register(
+                        null_ls.builtins.formatting.prettierd.with {
+                            extra_filetypes = { "json", "markdown" },
+                        }
+                    )
+                end,
+            }
+        end,
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
