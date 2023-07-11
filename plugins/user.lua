@@ -1,4 +1,5 @@
 return {
+    { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
     {
         "nguyenvukhang/nvim-toggler",
         event = "BufRead",
